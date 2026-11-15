@@ -7,6 +7,7 @@
 
 - **HTML と CSS だけ**で作る。JavaScript・ビルドツール・フレームワークは使わない。
 - ドメインは **sgyk.jp**、問い合わせメールは **info@sgyk.jp**。旧 `sgline.jp` / `info@sgline.jp` は書かない。
+  公開 URL は **https://www.sgyk.jp/**（www 付き）。`canonical` `og:url` `og:image` は `https://www.sgyk.jp/…` で書く。
 - 画像は `images/` フォルダのものだけを使う（外部サイトの画像を直リンクしない）。
 - スマホで必ず見やすいこと。変更したら幅 375px でも確認し、横スクロールが出ないこと。
 - 会社情報・実績の文言は、旧サイトの内容か、依頼者が写真フォルダの名前で指定した内容が元。勝手に創作・追加しない。
@@ -28,7 +29,7 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
 - ヘッダー・メニュー（`.drawer`）・CONTACT・フッターは**全ページに同じ HTML をコピー**している。
   1か所直したら**全ページ（ルートの4枚 + works/ の41枚）**を直す。
 - `works/` 内のページはリンクと画像のパスがすべて `../` 始まり（`../css/style.css`、`../images/…`、`../index.html`）。
-- ページを増やすときは既存ページを複製し、`<title>` `description` `canonical` `og:url` と
+- ページを増やすときは既存ページを複製し、`<title>` `description` `canonical` `og:url`（`https://www.sgyk.jp/…`）と
   ナビの `aria-current="page"` を付け替える。
 
 ## 会社情報（変更時は全ページをそろえる）
@@ -113,7 +114,10 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
 ## 公開（GitHub と Cloudflare Pages）
 
 - リポジトリは GitHub の `atsunori7/sgyk-jp`（公開）。`main` に push すると Cloudflare Pages（プロジェクト `sgyk-jp`、ビルド設定なし）が自動で更新する。
-- 公開 URL は `https://sgyk-jp.pages.dev`。
+- 公開 URL は `https://www.sgyk.jp/`（Cloudflare Pages のカスタムドメイン）。`https://sgyk-jp.pages.dev` でも同じ内容が見られる。
+- `sgyk.jp`（www なし）は Cloudflare の転送ルール（Rules → Redirect Rules）で `https://www.sgyk.jp/` の同じパスへ 301 転送している。
 - `_redirects` は Cloudflare Pages 用の設定ファイル。`CLAUDE.md`・`.claude/`・`.gitignore` をサイトから見えなくしている（トップへ転送）。消さないこと。
-- sgyk.jp の DNS は VALUE-DOMAIN で管理されており、同じサーバーでメール（info@sgyk.jp）も動いている。
-  DNS を変えるときはメール用のレコード（MX・SPF）を必ず残す。
+- sgyk.jp の DNS は Cloudflare で管理している（ネームサーバー fay / luke.ns.cloudflare.com。ドメインの契約は VALUE-DOMAIN のまま）。
+  メール（@sgyk.jp）はバリューサーバー（e6.valueserver.jp / 157.7.184.26）で動いており、Cloudflare は通らない。
+  DNS を変えるときはメール用のレコード（MX → mail.sgyk.jp、mail の A、SPF・DKIM・DMARC の TXT）を必ず残し、
+  メール関係のレコードは「DNS only」のままにする（Proxied にするとメールが止まる）。
