@@ -6,6 +6,8 @@
 ## 絶対に守ること
 
 - **HTML と CSS だけ**で作る。JavaScript・ビルドツール・フレームワークは使わない。
+  例外: Cloudflare Web Analytics の計測用スクリプトは、Cloudflare Pages が配信時に各ページへ自動で差し込んでいる。
+  サイトのファイルには書かない（自分で `<script>` を足さない）。設定は Cloudflare の Pages → sgyk-jp → Metrics → Web Analytics。
 - ドメインは **sgyk.jp**、問い合わせメールは **info@sgyk.jp**。旧 `sgline.jp` / `info@sgline.jp` は書かない。
   公開 URL は **https://www.sgyk.jp/**（www 付き）。`canonical` `og:url` `og:image` は `https://www.sgyk.jp/…` で書く。
 - 画像は `images/` フォルダのものだけを使う（外部サイトの画像を直リンクしない）。
@@ -116,6 +118,8 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
 - リポジトリは GitHub の `atsunori7/sgyk-jp`（公開）。`main` に push すると Cloudflare Pages（プロジェクト `sgyk-jp`、ビルド設定なし）が自動で更新する。
 - 公開 URL は `https://www.sgyk.jp/`（Cloudflare Pages のカスタムドメイン）。`https://sgyk-jp.pages.dev` でも同じ内容が見られる。
 - `sgyk.jp`（www なし）は Cloudflare の転送ルール（Rules → Redirect Rules）で `https://www.sgyk.jp/` の同じパスへ 301 転送している。
+- アクセス数は Cloudflare の Web Analytics（Pages → sgyk-jp → Metrics → View Web Analytics）で見る。
+  sgyk.jp の Analytics（ドメイン側）はボットも含む概数。
 - `_redirects` は Cloudflare Pages 用の設定ファイル。`CLAUDE.md`・`.claude/`・`.gitignore` をサイトから見えなくしている（トップへ転送）。消さないこと。
 - sgyk.jp の DNS は Cloudflare で管理している（ネームサーバー fay / luke.ns.cloudflare.com。ドメインの契約は VALUE-DOMAIN のまま）。
   メール（@sgyk.jp）はバリューサーバー（e6.valueserver.jp / 157.7.184.26）で動いており、Cloudflare は通らない。
