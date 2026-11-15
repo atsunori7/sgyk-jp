@@ -109,3 +109,11 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
 
 `python3 -m http.server 8765` をこのフォルダで実行し `http://localhost:8765/` を開く
 （`.claude/launch.json` の `site` でも起動できる）。PC 幅と 375px 幅の両方を見る。
+
+## 公開（GitHub と Cloudflare Pages）
+
+- リポジトリは GitHub の `atsunori7/sgyk-jp`（公開）。`main` に push すると Cloudflare Pages（プロジェクト `sgyk-jp`、ビルド設定なし）が自動で更新する。
+- 公開 URL は `https://sgyk-jp.pages.dev`。
+- `_redirects` は Cloudflare Pages 用の設定ファイル。`CLAUDE.md`・`.claude/`・`.gitignore` をサイトから見えなくしている（トップへ転送）。消さないこと。
+- sgyk.jp の DNS は VALUE-DOMAIN で管理されており、同じサーバーでメール（info@sgyk.jp）も動いている。
+  DNS を変えるときはメール用のレコード（MX・SPF）を必ず残す。
