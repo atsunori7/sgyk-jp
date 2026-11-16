@@ -30,7 +30,9 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 ```
 
 - ナビは HOME / ABOUT / STORE WORKS / HOUSING WORKS / CUSTOM WORKS / CONTACT の6項目。
-  PC のヘッダー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
+  PC のヘッダーは 1 段目にロゴ、2 段目（右寄せ）にメニュー（`.header` が `flex-direction: column`、`.gnav` が `align-self: flex-end`）。
+  ロゴとメニューを同じ段に戻さない（依頼者の指示。窮屈に見えるため）。
+  メニュー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
 
 - ヘッダー・メニュー（`.drawer`）・CONTACT・フッターは**全ページに同じ HTML をコピー**している。
   1か所直したら**全ページ（ルートの4枚 + works/ の41枚）**を直す。
@@ -72,6 +74,8 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 - メニュー開閉: `#nav-toggle` チェックボックス + `.nav-btn` ラベル + `.drawer`。
   `<input>` → `<label>` → `<nav class="drawer">` の並び順（兄弟セレクタ）を崩さない。
 - HOUSING WORKS のタブ: ラジオボタン `#tab-all` `#tab-rc` `#tab-wood` と `li` の `data-type="rc|wood"`。
+- CUSTOM WORKS の写真の拡大: チェックボックス `.lb-toggle` + `.lightbox`（`@keyframes lbFade` `lbZoom`）。
+  開いている間は `html:has(.lb-toggle:checked)` で後ろのページのスクロールを止める。
 - `prefers-reduced-motion: reduce` では動きを止める設定を維持する。
 
 ## 物件の詳細ページ（works/<slug>.html）
@@ -91,8 +95,13 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 
 - index.html と works.html の HOUSING WORKS の後ろ（`<section id="custom">`）に同じ内容を置く（トップだけ MORE リンク付き）。詳細ページは無い。
 - Furniture（家具）と Lighting（照明）の 2 グループ（`.custom-group`）。写真 1 枚ごとに
-  `<li class="reveal"><figure><div class="custom-img reveal-img"><img …></div><figcaption><span class="custom-name">施設名</span><span class="custom-loc">pref / city</span></figcaption></figure></li>`。
+  `<li class="reveal"><figure><label for="cw-<slug>" class="custom-img reveal-img"><img …></label><figcaption><span class="custom-name">施設名</span><span class="custom-loc">pref / city</span></figcaption></figure></li>`。
   家具の写真は縦長なので `.custom-grid--furniture`（4:5）、照明は 4:3 で切り抜く。
+- 写真をクリックすると拡大表示（写真だけが小さい状態から徐々に大きくなる。どこをクリックしても閉じる）。
+  section#custom の末尾（`.wrap` の外）に、写真ごとに `<input type="checkbox" id="cw-<slug>" class="lb-toggle">` と
+  `<label for="cw-<slug>" class="lightbox"><img …></label>` の 2 行を置く。写真を足したら、この 2 行も足す。
+  この 2 行を `.reveal` などの動きのある要素の中に入れない（拡大表示が画面いっぱいに広がらなくなる）。
+  拡大表示でも同じ画像を使うので、`images/custom/` の写真は元の大きさのまま（長辺 1280px まで）保存している。
 - **年は表示しない**（依頼者の指示）。施設名と場所は元写真のファイル名「施設名:市区:都道府県」（Finder では「/」区切り）から取り、
   場所はサイトの他の欄と同じ小文字の `pref / city` に並べ替える（例: `notredame:shimonoseki:Yamaguchi` → notredame ／ yamaguchi / shimonoseki）。
   施設名はファイル名の表記のまま（LAZOR GARDEN は STORE WORKS 側の「LAZOR GARDEN SAPPORO」とそろえていない）。
