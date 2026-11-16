@@ -17,9 +17,9 @@
 ## ファイル構成
 
 ```
-index.html     トップ（HERO / ABOUT / SOLUTION / WORKS 抜粋6件 / HOUSING WORKS / CUSTOM WORKS / CONTACT / ACCESS）
+index.html     トップ（HERO / ABOUT / SOLUTION / WORKS 抜粋6件 / CUSTOM WORKS / HOUSING WORKS / CONTACT / ACCESS）
 about.html     会社概要・ご挨拶
-works.html     STORE WORKS 全37件の一覧 + HOUSING WORKS（#housing）+ CUSTOM WORKS（#custom）
+works.html     STORE WORKS 全37件の一覧 + CUSTOM WORKS（#custom）+ HOUSING WORKS（#housing）
 works/         物件ごとの詳細ページ（works/<slug>.html、店舗37枚 + 住宅4枚 house-o / house-s / house-m / house-t）
 contact.html   お問い合わせ
 css/style.css  全ページ共通のスタイル（これ1枚。先頭に目次あり）
@@ -29,7 +29,8 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
 images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 ```
 
-- ナビは HOME / ABOUT / STORE WORKS / HOUSING WORKS / CUSTOM WORKS / CONTACT の6項目。
+- ナビは HOME / ABOUT / STORE WORKS / CUSTOM WORKS / HOUSING WORKS / CONTACT の6項目。
+  ページ内の並びもナビと同じ STORE → CUSTOM → HOUSING（依頼者の指示で CUSTOM と HOUSING を入れ替えた）。
   PC のヘッダーは 1 段目にロゴ、2 段目（右寄せ）にメニュー（`.header` が `flex-direction: column`、`.gnav` が `align-self: flex-end`）。
   ロゴとメニューを同じ段に戻さない（依頼者の指示。窮屈に見えるため）。
   メニュー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
@@ -93,7 +94,7 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 
 ## CUSTOM WORKS（特注家具・照明）
 
-- index.html と works.html の HOUSING WORKS の後ろ（`<section id="custom">`）に同じ内容を置く（トップだけ MORE リンク付き）。詳細ページは無い。
+- index.html と works.html の HOUSING WORKS の前（トップは WORKS 抜粋、works.html は STORE WORKS の直後。`<section id="custom">`）に同じ内容を置く（トップだけ MORE リンク付き）。詳細ページは無い。
 - Furniture（家具）と Lighting（照明）の 2 グループ（`.custom-group`）。写真 1 枚ごとに
   `<li class="reveal"><figure><label for="cw-<slug>" class="custom-img reveal-img"><img …></label><figcaption><span class="custom-name">施設名</span><span class="custom-loc">pref / city</span></figcaption></figure></li>`。
   家具の写真は縦長なので `.custom-grid--furniture`（4:5）、照明は 4:3 で切り抜く。
