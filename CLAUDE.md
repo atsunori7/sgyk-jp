@@ -144,6 +144,10 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 - `sgyk.jp`（www なし）は Cloudflare の転送ルール（Rules → Redirect Rules）で `https://www.sgyk.jp/` の同じパスへ 301 転送している。
 - アクセス数は Cloudflare の Web Analytics（Pages → sgyk-jp → Metrics → View Web Analytics）で見る。
   sgyk.jp の Analytics（ドメイン側）はボットも含む概数。
+- **`css/style.css` を変えたら、全ページ（45枚）の `<link href="…css/style.css?v=20261117">` の `?v=` を新しい日付にする**
+  （同じ日の2回目以降は `?v=20261117-2` など）。Cloudflare がブラウザに CSS・画像を 4 時間キャッシュさせる設定
+  （`cache-control: max-age=14400`）のため、変えないと前に見た人のブラウザでは「新しい HTML ＋ 古い CSS」になり、配置が崩れる。
+  画像を同じ名前で差し替えた場合も最大 4 時間は古い画像が見えることがある（キャッシュを消して再読み込みすれば新しくなる）。
 - `_redirects` は Cloudflare Pages 用の設定ファイル。`CLAUDE.md`・`.claude/`・`.gitignore` をサイトから見えなくしている（トップへ転送）。消さないこと。
 - sgyk.jp の DNS は Cloudflare で管理している（ネームサーバー fay / luke.ns.cloudflare.com。ドメインの契約は VALUE-DOMAIN のまま）。
   メール（@sgyk.jp）はバリューサーバー（e6.valueserver.jp / 157.7.184.26）で動いており、Cloudflare は通らない。
