@@ -26,7 +26,7 @@ css/style.css  全ページ共通のスタイル（これ1枚。先頭に目次�
 images/        ロゴ（logo.png / logo-name.png）、HERO（hero-1〜4.jpg）、ABOUT（about-2 / about-3.jpg）、
                SOLUTION（solution-1 / 2.jpg）、ACCESS（office.jpg）、about.html 上部（bashamichi-1〜3.jpg）
 images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house-o-1.jpg など）
-images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
+images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数枚なら slug-1.jpg, slug-2.jpg）
 ```
 
 - ナビは HOME / ABOUT / STORE WORKS / CUSTOM WORKS / HOUSING WORKS / CONTACT の6項目。
@@ -106,7 +106,12 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 - **年は表示しない**（依頼者の指示）。施設名と場所は元写真のファイル名「施設名:市区:都道府県」（Finder では「/」区切り）から取り、
   場所はサイトの他の欄と同じ小文字の `pref / city` に並べ替える（例: `notredame:shimonoseki:Yamaguchi` → notredame ／ yamaguchi / shimonoseki）。
   施設名はファイル名の表記のまま（LAZOR GARDEN は STORE WORKS 側の「LAZOR GARDEN SAPPORO」とそろえていない）。
-- 元写真は `Custom Works/Furniture` と `Custom Works/Lighting`。並びはファイル名のアルファベット順。写真を足したら index.html と works.html の両方に足す。
+  ファイル名の並びが「施設名:都道府県:地名」のもの（`GDK:Tokyo :omotesand`）や都市名だけのもの（`MJD:Sendai`）もある。
+  書かれていない都道府県は足さない（MJD → sendai、bellnarl → wakayama）。GDK の「omotesand」は表参道の綴り漏れとみなして omotesando と書いた。
+- 1 施設に写真が複数あるとき（ファイル名の末尾が `:01` `:02`）は `<slug>-1.jpg` `<slug>-2.jpg` とし、1 枚ずつ別の `li` にして同じ施設名・場所を付ける。
+  alt は「施設名（場所）の特注家具（写っている物）」。
+  横長の写真を 4:5 で切り抜くときは、家具が写るよう `<img>` に `style="object-position: …"` を付けて位置をずらす（例: mjd-2.jpg は 68% 50%）。
+- 元写真は `Custom Works/Furniture` と `Custom Works/Lighting`。並びはファイル名のアルファベット順（大文字小文字は区別しない）。写真を足したら index.html と works.html の両方に足す。
 
 ## 実績（WORKS）を追加するとき
 
