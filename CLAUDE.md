@@ -17,16 +17,20 @@
 ## ファイル構成
 
 ```
-index.html     トップ（HERO / ABOUT / SOLUTION / WORKS 抜粋6件 / HOUSING WORKS / CONTACT / ACCESS）
+index.html     トップ（HERO / ABOUT / SOLUTION / WORKS 抜粋6件 / HOUSING WORKS / CUSTOM WORKS / CONTACT / ACCESS）
 about.html     会社概要・ご挨拶
-works.html     STORE WORKS 全37件の一覧 + HOUSING WORKS（#housing）
+works.html     STORE WORKS 全37件の一覧 + HOUSING WORKS（#housing）+ CUSTOM WORKS（#custom）
 works/         物件ごとの詳細ページ（works/<slug>.html、店舗37枚 + 住宅4枚 house-o / house-s / house-m / house-t）
 contact.html   お問い合わせ
 css/style.css  全ページ共通のスタイル（これ1枚。先頭に目次あり）
 images/        ロゴ（logo.png / logo-name.png）、HERO（hero-1〜4.jpg）、ABOUT（about-2 / about-3.jpg）、
                SOLUTION（solution-1 / 2.jpg）、ACCESS（office.jpg）、about.html 上部（bashamichi-1〜3.jpg）
 images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house-o-1.jpg など）
+images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設1枚）
 ```
+
+- ナビは HOME / ABOUT / STORE WORKS / HOUSING WORKS / CUSTOM WORKS / CONTACT の6項目。
+  PC のヘッダー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
 
 - ヘッダー・メニュー（`.drawer`）・CONTACT・フッターは**全ページに同じ HTML をコピー**している。
   1か所直したら**全ページ（ルートの4枚 + works/ の41枚）**を直す。
@@ -82,6 +86,17 @@ images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg。住宅は house
   PREV / NEXT は住宅どうし、中央のボタンは `../works.html#housing`、ナビの `aria-current` は HOUSING WORKS に付ける。
   一覧（works.html と index.html の `.rows`）の行は `<li data-type><a href><img>…<span class="row-view">VIEW MORE</span></a></li>`。
   住宅を追加したら両方の `.rows` に行を足す。元写真は `house追加` フォルダ（フォルダ名が「名前:年:構造」）。
+
+## CUSTOM WORKS（特注家具・照明）
+
+- index.html と works.html の HOUSING WORKS の後ろ（`<section id="custom">`）に同じ内容を置く（トップだけ MORE リンク付き）。詳細ページは無い。
+- Furniture（家具）と Lighting（照明）の 2 グループ（`.custom-group`）。写真 1 枚ごとに
+  `<li class="reveal"><figure><div class="custom-img reveal-img"><img …></div><figcaption><span class="custom-name">施設名</span><span class="custom-loc">pref / city</span></figcaption></figure></li>`。
+  家具の写真は縦長なので `.custom-grid--furniture`（4:5）、照明は 4:3 で切り抜く。
+- **年は表示しない**（依頼者の指示）。施設名と場所は元写真のファイル名「施設名:市区:都道府県」（Finder では「/」区切り）から取り、
+  場所はサイトの他の欄と同じ小文字の `pref / city` に並べ替える（例: `notredame:shimonoseki:Yamaguchi` → notredame ／ yamaguchi / shimonoseki）。
+  施設名はファイル名の表記のまま（LAZOR GARDEN は STORE WORKS 側の「LAZOR GARDEN SAPPORO」とそろえていない）。
+- 元写真は `Custom Works/Furniture` と `Custom Works/Lighting`。並びはファイル名のアルファベット順。写真を足したら index.html と works.html の両方に足す。
 
 ## 実績（WORKS）を追加するとき
 
