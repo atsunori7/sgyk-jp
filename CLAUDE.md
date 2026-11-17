@@ -19,8 +19,8 @@
 ```
 index.html     トップ（HERO / ABOUT / SOLUTION / WORKS 抜粋6件 / CUSTOM WORKS / HOUSING WORKS / CONTACT / ACCESS）
 about.html     会社概要・ご挨拶
-works.html     STORE WORKS 全37件の一覧 + CUSTOM WORKS（#custom）+ HOUSING WORKS（#housing）
-works/         物件ごとの詳細ページ（works/<slug>.html、店舗37枚 + 住宅4枚 house-o / house-s / house-m / house-t）
+works.html     STORE WORKS 全38件の一覧 + CUSTOM WORKS（#custom）+ HOUSING WORKS（#housing）
+works/         物件ごとの詳細ページ（works/<slug>.html、店舗38枚 + 住宅4枚 house-o / house-s / house-m / house-t）
 contact.html   お問い合わせ
 css/style.css  全ページ共通のスタイル（これ1枚。先頭に目次あり）
 images/        ロゴ（logo.png / logo-name.png）、HERO（hero-1〜4.jpg）、ABOUT（about-2 / about-3.jpg）、
@@ -36,7 +36,7 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
   メニュー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
 
 - ヘッダー・メニュー（`.drawer`）・CONTACT・フッターは**全ページに同じ HTML をコピー**している。
-  1か所直したら**全ページ（ルートの4枚 + works/ の41枚）**を直す。
+  1か所直したら**全ページ（ルートの4枚 + works/ の42枚）**を直す。
 - `works/` 内のページはリンクと画像のパスがすべて `../` 始まり（`../css/style.css`、`../images/…`、`../index.html`）。
 - ページを増やすときは既存ページを複製し、`<title>` `description` `canonical` `og:url`（`https://www.sgyk.jp/…`）と
   ナビの `aria-current="page"` を付け替える。
@@ -127,6 +127,8 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
    頭文字だけ大文字にそろえる（例: wedding → Wedding、furniture＆Lighting → Furniture & Lighting）。
    カテゴリは旧サイト由来の物件が「Bridal」、追加分が「Wedding」で混在している（依頼者の指示があるまで統一しない）。
    「燔家八風」は読みが未確認のため slug を仮に `happu` としている。
+   DESSIN（フォルダ名 `DESSIN:2023:kumamoto:construction:design by PLAINS`）は種類が無いため、依頼者の指示でカテゴリを出していない
+   （一覧の `.work-cat`、詳細の `.pills` と Category 行を置かない）。Work は「Construction (Designed by PLAINS)」（依頼者の指示）。
 6. 元写真のフォルダ名と旧サイトの記載が食い違う場合（例: フォルダ名は「札幌」だが旧サイトは okinawa / yomitanson）は旧サイトの記載を使う。
 
 ## 画像の決まり
@@ -150,7 +152,7 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - `sgyk.jp`（www なし）は Cloudflare の転送ルール（Rules → Redirect Rules）で `https://www.sgyk.jp/` の同じパスへ 301 転送している。
 - アクセス数は Cloudflare の Web Analytics（Pages → sgyk-jp → Metrics → View Web Analytics）で見る。
   sgyk.jp の Analytics（ドメイン側）はボットも含む概数。
-- **`css/style.css` を変えたら、全ページ（45枚）の `<link href="…css/style.css?v=20261117">` の `?v=` を新しい日付にする**
+- **`css/style.css` を変えたら、全ページ（46枚）の `<link href="…css/style.css?v=20261117">` の `?v=` を新しい日付にする**
   （同じ日の2回目以降は `?v=20261117-2` など）。Cloudflare がブラウザに CSS・画像を 4 時間キャッシュさせる設定
   （`cache-control: max-age=14400`）のため、変えないと前に見た人のブラウザでは「新しい HTML ＋ 古い CSS」になり、配置が崩れる。
   画像を同じ名前で差し替えた場合も最大 4 時間は古い画像が見えることがある（キャッシュを消して再読み込みすれば新しくなる）。
