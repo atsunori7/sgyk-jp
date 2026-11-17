@@ -3,7 +3,7 @@
    株式会社エスジー (sgyk.jp) 共通スタイル
    HTML と CSS だけで動きます（JavaScript は使いません）
    目次: 1.基本 2.ヘッダー/メニュー 3.ヒーロー 4.共通パーツ
-         5.ABOUT 6.SOLUTION 7.WORKS 8.リスト/タブ 8b.CUSTOM WORKS 9.CONTACT
+         5.ABOUT 6.SOLUTION 7.WORKS 8.セクション見出し 8b.CUSTOM WORKS 9.CONTACT
          10.ACCESS/フッター 11.下層ページ 12.動き 13.スマホ
    ========================================================== */
 
@@ -93,14 +93,13 @@ ul { list-style: none; }
 .nav-toggle:checked ~ .drawer li:nth-child(3) { transition-delay: .39s; }
 .nav-toggle:checked ~ .drawer li:nth-child(4) { transition-delay: .46s; }
 .nav-toggle:checked ~ .drawer li:nth-child(5) { transition-delay: .53s; }
-.nav-toggle:checked ~ .drawer li:nth-child(6) { transition-delay: .60s; }
 .drawer a { display: flex; align-items: baseline; gap: 20px; padding: 18px 0; font-size: clamp(26px, 5vw, 44px); font-weight: 300; letter-spacing: .06em; line-height: 1.3; transition: color .3s, padding .3s; }
 .drawer a small { font-family: var(--jp); font-size: 12px; opacity: .6; letter-spacing: .1em; white-space: nowrap; }
 .drawer a:hover { color: var(--accent); padding-left: 14px; }
 .drawer-info { max-width: var(--wrap); margin: 34px auto 0; width: 100%; font-size: 13px; opacity: .75; line-height: 1.9; }
 
 /* ---------- 3. ヒーロー ---------- */
-.hero { position: relative; height: 100vh; height: 100svh; min-height: 520px; background: #111 url(../images/hero-1.jpg) center / cover no-repeat; color: var(--white); overflow: hidden; }
+.hero { position: relative; height: 100vh; height: 100svh; min-height: 520px; background: #111 url(../images/hero-2.jpg) center / cover no-repeat; color: var(--white); overflow: hidden; }
 .hero-slides, .hero-slides li { position: absolute; inset: 0; }
 .hero-slides li { opacity: 0; animation: heroFade 28s linear infinite; }
 .hero-slides li:nth-child(2) { animation-delay: 7s; }
@@ -201,36 +200,10 @@ ul { list-style: none; }
 .work-note { margin-top: 14px; font-size: 12.5px; line-height: 1.8; color: var(--ink-soft); }
 .works-more { text-align: center; margin-top: clamp(50px, 7vw, 90px); }
 
-/* ---------- 8. リスト / タブ（HOUSING WORKS） ---------- */
+/* ---------- 8. セクション見出し（CUSTOM WORKS で使用） ---------- */
 .list-head { position: relative; text-align: center; margin-bottom: 50px; }
 .list-head .h-en { font-size: clamp(34px, 5vw, 56px); font-weight: 800; }
 .list-head .link-more { position: absolute; right: 0; top: 50%; transform: translateY(-50%); text-align: left; }
-.tabs { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--ink); margin-bottom: 30px; }
-.tabs label { height: 58px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 700; letter-spacing: .1em; cursor: pointer; transition: background .3s, color .3s; }
-.tabs label + label { border-left: 1px solid var(--ink); }
-.tabs label:hover { background: rgba(0,0,0,.06); }
-.tab-radio { position: absolute; opacity: 0; pointer-events: none; }
-#tab-all:checked ~ .tabs label[for="tab-all"],
-#tab-rc:checked ~ .tabs label[for="tab-rc"],
-#tab-wood:checked ~ .tabs label[for="tab-wood"] { background: var(--ink); color: var(--white); }
-#tab-all:focus-visible ~ .tabs label[for="tab-all"],
-#tab-rc:focus-visible ~ .tabs label[for="tab-rc"],
-#tab-wood:focus-visible ~ .tabs label[for="tab-wood"] { outline: 2px solid var(--accent); outline-offset: 2px; }
-#tab-rc:checked ~ .rows li:not([data-type="rc"]),
-#tab-wood:checked ~ .rows li:not([data-type="wood"]) { display: none; }
-.rows li { display: flex; align-items: center; gap: 22px; padding: 30px 0; border-bottom: 1px solid var(--line); transition: padding .3s, background .3s; animation: rowIn .5s both; }
-.rows li:hover { padding-left: 12px; background: rgba(255,255,255,.35); }
-@keyframes rowIn { from { opacity: 0; transform: translateY(10px); } }
-.rows time { font-weight: 300; color: var(--ink-soft); min-width: 5em; }
-.tag { min-width: 120px; padding: 0 10px; background: var(--ink); color: var(--white); font-family: var(--jp); font-size: 11.5px; font-weight: 700; line-height: 2; text-align: center; }
-.rows strong { font-family: var(--jp); font-weight: 700; font-size: 15px; }
-/* 写真つきの行（詳細ページへのリンク） */
-.rows li a { flex: 1; display: flex; align-items: center; gap: 22px; }
-.rows img { width: 132px; aspect-ratio: 3 / 2; object-fit: cover; }
-.rows li:has(a) { padding: 18px 0; }
-.rows li:has(a):hover { padding-left: 12px; }
-.row-view { margin-left: auto; padding-right: 12px; font-size: 11.5px; font-weight: 700; letter-spacing: .16em; color: var(--ink-soft); white-space: nowrap; transition: color .3s; }
-.rows li a:hover .row-view { color: var(--accent); }
 
 /* ---------- 8b. CUSTOM WORKS（特注家具・照明。写真 + 施設名・場所のみで、年は出さない） ---------- */
 .custom-group { display: grid; grid-template-columns: 240px 1fr; gap: 24px clamp(28px, 5vw, 70px); padding: clamp(36px, 5vw, 56px) 0; border-top: 1px solid var(--ink); }
@@ -373,15 +346,6 @@ html:has(.lb-toggle:checked) { overflow: hidden; }
   .list-head { text-align: left; }
   .list-head .link-more { position: relative; top: auto; transform: none; margin-top: 16px; }
   .h-jp { font-size: 20px; letter-spacing: .04em; }
-  .rows li { flex-wrap: wrap; gap: 8px 14px; padding: 22px 0; }
-  .rows strong { width: 100%; }
-  .tag { min-width: 84px; }
-  .rows li a { display: grid; grid-template-columns: 104px auto 1fr; gap: 6px 14px; }
-  .rows img { width: 104px; grid-row: 1 / 3; }
-  .rows li a time { min-width: 0; }
-  .rows li a .tag { justify-self: start; }
-  .rows li a strong { grid-column: 2 / -1; width: auto; }
-  .row-view { display: none; }
   .custom-grid { gap: 26px 14px; }
   .custom-grid figcaption { margin-top: 10px; padding-left: 10px; }
   .custom-name { font-size: 14px; }
