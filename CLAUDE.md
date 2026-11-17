@@ -109,10 +109,12 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
   場所はサイトの他の欄と同じ小文字の `pref / city` に並べ替える（例: `notredame:shimonoseki:Yamaguchi` → notredame ／ yamaguchi / shimonoseki）。
   施設名はファイル名の表記のまま（LAZOR GARDEN は STORE WORKS 側の「LAZOR GARDEN SAPPORO」とそろえていない）。
   ファイル名の並びが「施設名:都道府県:地名」のもの（`GDK:Tokyo :omotesand`）や都市名だけのもの（`MJD:Sendai`）もある。
-  書かれていない都道府県は足さない（MJD → sendai、bellnarl → wakayama）。GDK の「omotesand」は表参道の綴り漏れとみなして omotesando と書いた。
+  書かれていない都道府県は足さない（MJD → sendai、bellnarl → wakayama、The Seasons → yokohama）。GDK の「omotesand」は表参道の綴り漏れとみなして omotesando と書いた。
+- bellnarl は Furniture と Lighting の両方にある。家具は `bellnarl.jpg`（`cw-bellnarl`）、照明は `bellnarl-lighting.jpg`（`cw-bellnarl-lighting`）と分けている。
 - 1 施設に写真が複数あるとき（ファイル名の末尾が `:01` `:02`）は `<slug>-1.jpg` `<slug>-2.jpg` とし、1 枚ずつ別の `li` にして同じ施設名・場所を付ける。
   alt は「施設名（場所）の特注家具（写っている物）」。
   横長の写真を 4:5 で切り抜くときは、家具が写るよう `<img>` に `style="object-position: …"` を付けて位置をずらす（例: mjd-2.jpg は 68% 50%）。
+  照明（4:3）で縦長の写真を使うときも同じ（bellnarl-lighting.jpg は 50% 20%、the-seasons.jpg は 50% 40%）。
 - 元写真は `Custom Works/Furniture` と `Custom Works/Lighting`。並びはファイル名のアルファベット順（大文字小文字は区別しない）。写真を足したら index.html と works.html の両方に足す。
 
 ## 実績（WORKS）を追加するとき
