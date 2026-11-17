@@ -90,6 +90,8 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - 写真は**1物件 3〜5 枚**。旧サイト（sgline.jp）の同じ物件ページで使われていた写真を、掲載順のまま優先して選ぶ。
   `<slug>-1.jpg` が一覧のサムネイルと詳細ページのメイン写真を兼ねる。
 - 例外: M.D.B・lasoeur・BALENCIAGA・on A TABLE は手元に写真が 2 枚しか無いため 2 枚。写真が増えたら 3 枚以上にする。
+- CLUB NANAE の写真は依頼者の指定で `nanae` フォルダの nanae_001 / 006 / 013 / 016 / 018（この順で club-nanae-1〜5.jpg）。
+  すべて縦長だが、指定なので「1枚目は横長」の決まりより優先する。club-nanae-1.jpg はトップ ABOUT 欄の写真も兼ねる。
 - `.pager` の PREV / NEXT は works.html の並び順（新しい順）の前後の物件。物件を追加・削除したら前後のページの PREV / NEXT も直す。
 
 ## CUSTOM WORKS（特注家具・照明）
@@ -156,6 +158,7 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
   （同じ日の2回目以降は `?v=20261117-2` など）。Cloudflare がブラウザに CSS・画像を 4 時間キャッシュさせる設定
   （`cache-control: max-age=14400`）のため、変えないと前に見た人のブラウザでは「新しい HTML ＋ 古い CSS」になり、配置が崩れる。
   画像を同じ名前で差し替えた場合も最大 4 時間は古い画像が見えることがある（キャッシュを消して再読み込みすれば新しくなる）。
+  防ぐには、差し替えた画像を読み込んでいる `<img src>` に `?v=日付` を付ける（例: works/club-nanae.html の club-nanae-2〜5.jpg）。
 - `_redirects` は Cloudflare Pages 用の設定ファイル。`CLAUDE.md`・`.claude/`・`.gitignore` をサイトから見えなくしている（トップへ転送）。消さないこと。
 - sgyk.jp の DNS は Cloudflare で管理している（ネームサーバー fay / luke.ns.cloudflare.com。ドメインの契約は VALUE-DOMAIN のまま）。
   メール（@sgyk.jp）はバリューサーバー（e6.valueserver.jp / 157.7.184.26）で動いており、Cloudflare は通らない。
