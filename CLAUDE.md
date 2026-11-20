@@ -162,9 +162,10 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - Google Search Console は登録済み（2026-11-20）。プロパティは URL プレフィックス `https://www.sgyk.jp/`、確認方法は HTML タグ。
   index.html の `<meta name="google-site-verification" …>` を**消さない**（消すと所有権の確認が外れる）。
   sitemap.xml を送信済み（42 ページ検出）。トップページはすでに Google に登録されていた。
+- Bing Webmaster Tools も登録済み（2026-11-20、Google アカウントでログイン）。サイトは `https://www.sgyk.jp/`、確認方法は HTML メタタグ。
+  index.html の `<meta name="msvalidate.01" …>` も**消さない**。sitemap.xml を送信済み。
 - サイトの外で依頼者がすること（2026-11-20 に案内済み）: Google ビジネスプロフィール、
-  Bing Webmaster Tools（Search Console から取り込める）、旧ドメイン sgline.jp が契約中なら www.sgyk.jp へ 301 転送、
-  Cloudflare のメール隠し（Email Address Obfuscation）を切るか検討。
+  旧ドメイン sgline.jp が契約中なら www.sgyk.jp へ 301 転送、Cloudflare のメール隠し（Email Address Obfuscation）を切るか検討。
 
 ## 画像の決まり
 
