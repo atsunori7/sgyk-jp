@@ -159,8 +159,12 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - サイトのアイコンは `images/icon.png`（192×192 の正方形、背景透明。logo.png を正方形に余白を足して縮小）。
   Google の検索結果のアイコンは正方形でないと出ないことがある。
 - `llms.txt` は今ある文章だけで作る（新しい文章を作らない）。物件・施設・会社情報が変わったら合わせる。
-- サイトの外で依頼者がすること（2026-11-20 に案内済み）: Google ビジネスプロフィール、Google Search Console（sitemap.xml を送信）、
-  Bing Webmaster Tools、旧ドメイン sgline.jp が契約中なら www.sgyk.jp へ 301 転送、Cloudflare のメール隠し（Email Address Obfuscation）を切るか検討。
+- Google Search Console は登録済み（2026-11-20）。プロパティは URL プレフィックス `https://www.sgyk.jp/`、確認方法は HTML タグ。
+  index.html の `<meta name="google-site-verification" …>` を**消さない**（消すと所有権の確認が外れる）。
+  sitemap.xml を送信済み（42 ページ検出）。トップページはすでに Google に登録されていた。
+- サイトの外で依頼者がすること（2026-11-20 に案内済み）: Google ビジネスプロフィール、
+  Bing Webmaster Tools（Search Console から取り込める）、旧ドメイン sgline.jp が契約中なら www.sgyk.jp へ 301 転送、
+  Cloudflare のメール隠し（Email Address Obfuscation）を切るか検討。
 
 ## 画像の決まり
 
