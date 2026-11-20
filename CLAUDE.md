@@ -10,6 +10,8 @@
   サイトのファイルには書かない（自分で `<script>` を足さない）。設定は Cloudflare の Pages → sgyk-jp → Metrics → Web Analytics。
 - ドメインは **sgyk.jp**、問い合わせメールは **info@sgyk.jp**。旧 `sgline.jp` / `info@sgline.jp` は書かない。
   公開 URL は **https://www.sgyk.jp/**（www 付き）。`canonical` `og:url` `og:image` は `https://www.sgyk.jp/…` で書く。
+  `canonical` と `og:url` は **`.html` を付けない**（例: `https://www.sgyk.jp/about`、`https://www.sgyk.jp/works/dessin`）。
+  Cloudflare Pages が `.html` 付きのアドレスを `.html` なしへ 308 転送するため（ページ内のリンクは `.html` 付きのままでよい）。
 - 画像は `images/` フォルダのものだけを使う（外部サイトの画像を直リンクしない）。
 - スマホで必ず見やすいこと。変更したら幅 375px でも確認し、横スクロールが出ないこと。
 - 会社情報・実績の文言は、旧サイトの内容か、依頼者が写真フォルダの名前で指定した内容が元。勝手に創作・追加しない。
@@ -22,8 +24,12 @@ about.html     会社概要・ご挨拶
 works.html     STORE WORKS 全38件の一覧 + CUSTOM WORKS（#custom）
 works/         物件ごとの詳細ページ（works/<slug>.html、店舗38枚）
 contact.html   お問い合わせ
+404.html       存在しないアドレスを開いたときのページ（noindex。パスはすべて / 始まり）
+robots.txt     検索エンジン・AI 検索の巡回ルール（すべて許可 + sitemap.xml の場所）
+sitemap.xml    検索エンジンに渡すページ一覧（42件）
+llms.txt       AI 向けのサイト案内（サイトにある文章だけで作ったもの）
 css/style.css  全ページ共通のスタイル（これ1枚。先頭に目次あり）
-images/        ロゴ（logo.png / logo-name.png）、HERO（hero-1〜4.jpg）、ABOUT（about-2 / about-3.jpg）、
+images/        ロゴ（logo.png / logo-name.png）、サイトのアイコン（icon.png）、HERO（hero-1〜4.jpg）、ABOUT（about-2 / about-3.jpg）、
                SOLUTION（solution-1 / 2.jpg）、ACCESS（office.jpg）、about.html 上部（bashamichi-1〜3.jpg）
 images/works/  物件の写真（<slug>-1.jpg 〜 <slug>-5.jpg）
 images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数枚なら slug-1.jpg, slug-2.jpg）
@@ -37,10 +43,12 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
   メニュー（`.gnav`）は幅 961px でぎりぎり1行に収まっているので、項目を増やすなら 961px 幅で確認する。
 
 - ヘッダー・メニュー（`.drawer`）・CONTACT・フッターは**全ページに同じ HTML をコピー**している。
-  1か所直したら**全ページ（ルートの4枚 + works/ の38枚）**を直す。
+  1か所直したら**全ページ（ルートの4枚 + works/ の38枚 + 404.html）**を直す。
 - `works/` 内のページはリンクと画像のパスがすべて `../` 始まり（`../css/style.css`、`../images/…`、`../index.html`）。
-- ページを増やすときは既存ページを複製し、`<title>` `description` `canonical` `og:url`（`https://www.sgyk.jp/…`）と
-  ナビの `aria-current="page"` を付け替える。
+- 404.html だけはパスがすべて `/` 始まり（`/css/style.css`、`/images/…`、`/about.html`、HOME は `/`）。
+  どの階層の存在しないアドレスでも表示されるため。相対パスに戻さない。
+- ページを増やすときは既存ページを複製し、`<title>` `description` `canonical` `og:url`（`https://www.sgyk.jp/…`、`.html` なし）、
+  パンくず（`.crumbs`）の名前と URL、ナビの `aria-current="page"` を付け替え、`sitemap.xml` と `llms.txt` にも足す。
 
 ## 会社情報（変更時は全ページをそろえる）
 
@@ -48,6 +56,7 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - 〒231-0011 神奈川県横浜市中区太田町4-50 馬車道450ビル5F
 - TEL 045-305-4223 ／ FAX 045-305-4224 ／ info@sgyk.jp
 - メールは `mailto:` リンク（フォームは置かない。サーバー側の処理が無いため）
+- 会社情報を変えたら、index.html ACCESS 欄の会社情報データ（`.access-info` の `<meta itemprop>`）と `llms.txt` もそろえる。
 
 ## デザインの決まり
 
@@ -116,13 +125,14 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
   横長の写真を 4:5 で切り抜くときは、家具が写るよう `<img>` に `style="object-position: …"` を付けて位置をずらす（例: mjd-2.jpg は 68% 50%）。
   照明（4:3）で縦長の写真を使うときも同じ（bellnarl-lighting.jpg は 50% 20%、the-seasons.jpg は 50% 40%）。
 - 元写真は `Custom Works/Furniture` と `Custom Works/Lighting`。並びはファイル名のアルファベット順（大文字小文字は区別しない）。写真を足したら index.html と works.html の両方に足す。
+  施設が増えたら `llms.txt` の CUSTOM WORKS 欄にも足す。
 
 ## 実績（WORKS）を追加するとき
 
 1. slug（半角英小文字とハイフン）を決め、写真 3〜5 枚を `images/works/<slug>-1.jpg` … の名前で保存する
    （例: `sips -s format jpeg -s formatOptions 78 -Z 1600 元.jpg --out images/works/xxx-1.jpg`）。
-2. `works/` の既存ページを複製して `works/<slug>.html` を作り、`<title>` `description` `canonical` `og:url` `og:image`、
-   物件名・表・写真・PREV / NEXT を書き換える。
+2. `works/` の既存ページを複製して `works/<slug>.html` を作り、`<title>` `description` `canonical` `og:url`（`.html` なし）`og:image`、
+   パンくず（`.crumbs` の 3 つ目の `itemprop="name"` と `itemprop="item"` の URL）、物件名・表・写真・PREV / NEXT を書き換える。
 3. `works.html` の `.works-grid` に `<a class="work reveal" href="works/<slug>.html">` を1つ複製して書き換える。
    並びは新しい順。最新なら先頭、過去の物件ならその年の位置に差し込み、前後のページの PREV / NEXT を付け替える。
    日付は `2025.07` 形式（月が不明なら年だけ）、場所は小文字ローマ字 `pref / city`。先頭3件以外の画像には `loading="lazy"`。
@@ -134,6 +144,23 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
    DESSIN（フォルダ名 `DESSIN:2023:kumamoto:construction:design by PLAINS`）は種類が無いため、依頼者の指示でカテゴリを出していない
    （一覧の `.work-cat`、詳細の `.pills` と Category 行を置かない）。Work は「Construction (Designed by PLAINS)」（依頼者の指示）。
 6. 元写真のフォルダ名と旧サイトの記載が食い違う場合（例: フォルダ名は「札幌」だが旧サイトは okinawa / yomitanson）は旧サイトの記載を使う。
+7. `sitemap.xml` に `<url><loc>https://www.sgyk.jp/works/<slug></loc><lastmod>追加した日</lastmod></url>` を足し、
+   `llms.txt` の STORE WORKS 欄にも同じ並び・同じ書式で 1 行足す。物件を削除したら両方から消す。
+
+## 検索対策（SEO / AI 検索）
+
+依頼者の希望（2026-11-20）で、見た目と文章を変えずに入れたもの。
+- 構造化データは **microdata**（HTML の `itemscope` `itemprop` 属性）で書いている。JSON-LD は `<script>` タグが要るので使わない。
+  - index.html: `<html>` に WebSite（サイト名「株式会社エスジー」、別名「エスジー」。`<head>` の `<meta itemprop>`）。
+  - index.html ACCESS 欄の `.access-info`: GeneralContractor（社名・別名・住所・電話・FAX・メール・ロゴ・創立・事業内容）。
+  - about / works / contact と works/ の各ページの `.crumbs`: BreadcrumbList（HOME → WORKS → 物件名）。URL は `.html` なし。
+- `sitemap.xml` の `lastmod` は、そのページの中身を最後に変えた日（メタ情報だけの変更では変えない）。
+- `404.html` があるので、存在しないアドレスは Cloudflare Pages が 404 を返す（以前はトップページを 200 で返していた）。
+- サイトのアイコンは `images/icon.png`（192×192 の正方形、背景透明。logo.png を正方形に余白を足して縮小）。
+  Google の検索結果のアイコンは正方形でないと出ないことがある。
+- `llms.txt` は今ある文章だけで作る（新しい文章を作らない）。物件・施設・会社情報が変わったら合わせる。
+- サイトの外で依頼者がすること（2026-11-20 に案内済み）: Google ビジネスプロフィール、Google Search Console（sitemap.xml を送信）、
+  Bing Webmaster Tools、旧ドメイン sgline.jp が契約中なら www.sgyk.jp へ 301 転送、Cloudflare のメール隠し（Email Address Obfuscation）を切るか検討。
 
 ## 画像の決まり
 
@@ -155,8 +182,9 @@ images/custom/ CUSTOM WORKS の写真（施設名の slug.jpg。1施設に複数
 - 公開 URL は `https://www.sgyk.jp/`（Cloudflare Pages のカスタムドメイン）。`https://sgyk-jp.pages.dev` でも同じ内容が見られる。
 - `sgyk.jp`（www なし）は Cloudflare の転送ルール（Rules → Redirect Rules）で `https://www.sgyk.jp/` の同じパスへ 301 転送している。
 - アクセス数は Cloudflare の Web Analytics（Pages → sgyk-jp → Metrics → View Web Analytics）で見る。
+  Web Analytics の一覧では「sgyk-jp.pages.dev +1」の行に数字が入る（「sgyk.jp」の行は 0 のまま）。
   sgyk.jp の Analytics（ドメイン側）はボットも含む概数。
-- **`css/style.css` を変えたら、全ページ（42枚）の `<link href="…css/style.css?v=20261117-2">` の `?v=` を新しい日付にする**
+- **`css/style.css` を変えたら、全ページ（42枚 + 404.html）の `<link href="…css/style.css?v=20261117-2">` の `?v=` を新しい日付にする**
   （同じ日の2回目以降は `?v=20261117-2` など）。Cloudflare がブラウザに CSS・画像を 4 時間キャッシュさせる設定
   （`cache-control: max-age=14400`）のため、変えないと前に見た人のブラウザでは「新しい HTML ＋ 古い CSS」になり、配置が崩れる。
   画像を同じ名前で差し替えた場合も最大 4 時間は古い画像が見えることがある（キャッシュを消して再読み込みすれば新しくなる）。

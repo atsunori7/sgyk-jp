@@ -1,0 +1,5 @@
+# www.sgyk.jp - allow all search engines and AI search crawlers
+User-agent: *
+Allow: /
+
+Sitemap: https://www.sgyk.jp/sitemap.xml
